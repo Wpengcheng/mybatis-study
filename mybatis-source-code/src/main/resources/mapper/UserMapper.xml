@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weipch.mapper.UserMapper">
+
+    <select id="getUserById" resultType="com.weipch.po.User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.weipch.po.User">
+        UPDATE user
+        SET
+        <if test="username != null">
+            username = #{username},
+        </if>
+        <if test="password != null">
+            password = #{password},
+        </if>
+        <if test="enabled != null">
+            enabled = #{enabled}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insertUser" parameterType="com.weipch.po.User">
+        INSERT INTO user (username, password, enabled)
+        VALUES (#{username}, #{password}, #{enabled})
+    </insert>
+
+
+    <delete id="deleteUserById" parameterType="com.weipch.po.User">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+</mapper>
